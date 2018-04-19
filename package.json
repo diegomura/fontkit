@@ -1,5 +1,5 @@
 {
-  "name": "fontkit",
+  "name": "@react-pdf/fontkit",
   "version": "1.7.7",
   "description": "An advanced font engine for Node and the browser",
   "keywords": [
