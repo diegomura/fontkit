@@ -3,12 +3,9 @@ playground/
 .DS_Store
 coverage/
 coverage.html
-dataTrie.json
 /index.js
 /base.js
 *.js.map
-useTrie.json
 use.json
 .nyc_output
-indicTrie.json
 indic.json
