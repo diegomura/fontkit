@@ -9,3 +9,6 @@ coverage.html
 use.json
 .nyc_output
 indic.json
+dataTrie.json
+useTrie.json
+indicTrie.json
