@@ -5,29 +5,29 @@ PATH := ./node_modules/.bin:$(PATH)
 
 all: index.js base.js
 
-src/opentype/shapers/data.trie:
+src/opentype/shapers/dataTrie.json:
 	babel-node src/opentype/shapers/generate-data.js
 
-src/opentype/shapers/use.trie:
+src/opentype/shapers/useTrie.json:
 	babel-node src/opentype/shapers/gen-use.js
 
-src/opentype/shapers/indic.trie:
+src/opentype/shapers/indicTrie.json:
 	babel-node src/opentype/shapers/gen-indic.js
 
-data.trie: src/opentype/shapers/data.trie
-	cp src/opentype/shapers/data.trie data.trie
+dataTrie.json: src/opentype/shapers/dataTrie.json
+	cp src/opentype/shapers/dataTrie.json dataTrie.json
 
-use.trie: src/opentype/shapers/use.trie
-	cp src/opentype/shapers/use.trie use.trie
+useTrie.json: src/opentype/shapers/useTrie.json
+	cp src/opentype/shapers/useTrie.json useTrie.json
 
-indic.trie: src/opentype/shapers/indic.trie
-	cp src/opentype/shapers/indic.trie indic.trie
+indicTrie.json: src/opentype/shapers/indicTrie.json
+	cp src/opentype/shapers/indicTrie.json indicTrie.json
 
-index.js: $(SOURCES) data.trie use.trie indic.trie
+index.js: $(SOURCES) dataTrie.json useTrie.json indicTrie.json
 	rollup -c -m -i src/index.js -o index.js
 
-base.js: $(SOURCES) data.trie use.trie indic.trie
+base.js: $(SOURCES) dataTrie.json useTrie.json indicTrie.json
 	rollup -c -m -i src/base.js -o base.js
 
 clean:
-	rm -f index.js base.js data.trie indic.trie use.trie src/opentype/shapers/data.trie src/opentype/shapers/use.trie src/opentype/shapers/use.json src/opentype/shapers/indic.trie src/opentype/shapers/indic.json
+	rm -f index.js base.js dataTrie.json indicTrie.json useTrie.json src/opentype/shapers/dataTrie.json src/opentype/shapers/useTrie.json src/opentype/shapers/use.json src/opentype/shapers/indicTrie.json src/opentype/shapers/indic.json

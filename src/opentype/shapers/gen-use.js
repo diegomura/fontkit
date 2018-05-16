@@ -274,7 +274,7 @@ function decompose(code) {
   return decomposition;
 }
 
-fs.writeFileSync(__dirname + '/use.trie', trie.toBuffer());
+fs.writeFileSync(__dirname + '/useTrie.json', JSON.stringify(trie.toBuffer()));
 
 let stateMachine = compile(fs.readFileSync(__dirname + '/use.machine', 'utf8'), symbols);
 let json = Object.assign({

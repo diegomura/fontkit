@@ -14,9 +14,10 @@ import {
   HALANT_OR_COENG_FLAGS, INDIC_CONFIGS,
   INDIC_DECOMPOSITIONS
 } from './indic-data';
+import trieData from './indicTrie.json';
 
 const {decompositions} = useData;
-const trie = new UnicodeTrie(require('fs').readFileSync(__dirname + '/indic.trie'));
+const trie = new UnicodeTrie(new Uint8Array(trieData.data));
 const stateMachine = new StateMachine(indicMachine);
 
 /**
