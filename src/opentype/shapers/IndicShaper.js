@@ -1,7 +1,7 @@
 import DefaultShaper from './DefaultShaper';
 import StateMachine from 'dfa';
 import UnicodeTrie from 'unicode-trie';
-import unicode from 'unicode-properties';
+import unicode from '@react-pdf/unicode-properties';
 import * as Script from '../../layout/Script';
 import GlyphInfo from '../GlyphInfo';
 import indicMachine from './indic.json';

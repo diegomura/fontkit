@@ -31,16 +31,15 @@
   "author": "Devon Govett <devongovett@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@react-pdf/unicode-properties": "^2.0.0",
     "babel-runtime": "^6.11.6",
     "brfs": "^1.4.0",
-    "brotli": "^1.2.0",
     "browserify-optional": "^1.0.0",
     "clone": "^1.0.1",
     "deep-equal": "^1.0.0",
     "dfa": "^1.0.0",
     "restructure": "^0.5.3",
     "tiny-inflate": "^1.0.2",
-    "unicode-properties": "^1.0.0",
     "unicode-trie": "^0.3.0"
   },
   "devDependencies": {
