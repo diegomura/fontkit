@@ -30,4 +30,4 @@ for (let i = 0; i < codepoints.length; i++) {
   }
 }
 
-fs.writeFileSync(__dirname + '/data.trie', trie.toBuffer());
+fs.writeFileSync(__dirname + '/dataTrie.json', JSON.stringify(trie.toBuffer()));

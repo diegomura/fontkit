@@ -45,7 +45,7 @@ export default class BBox {
   }
 
   addPoint(x, y) {
-    if (Math.abs(x) != Infinity) {
+    if (Math.abs(x) !== Infinity) {
       if (x < this.minX) {
         this.minX = x;
       }
@@ -55,7 +55,7 @@ export default class BBox {
       }
     }
 
-    if (Math.abs(y) != Infinity) {
+    if (Math.abs(y) !== Infinity) {
       if (y < this.minY) {
         this.minY = y;
       }

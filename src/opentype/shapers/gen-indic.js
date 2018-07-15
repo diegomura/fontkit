@@ -200,7 +200,7 @@ for (let i = 0; i < codepoints.length; i++) {
   }
 }
 
-fs.writeFileSync(__dirname + '/indic.trie', trie.toBuffer());
+fs.writeFileSync(__dirname + '/indicTrie.json', JSON.stringify(trie.toBuffer()));
 
 let stateMachine = compile(fs.readFileSync(__dirname + '/indic.machine', 'utf8'), symbols);
 fs.writeFileSync(__dirname + '/indic.json', JSON.stringify(stateMachine));
