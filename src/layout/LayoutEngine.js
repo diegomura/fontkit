@@ -1,9 +1,9 @@
+import unicode from '@react-pdf/unicode-properties';
 import KernProcessor from './KernProcessor';
 import UnicodeLayoutEngine from './UnicodeLayoutEngine';
 import GlyphRun from './GlyphRun';
 import GlyphPosition from './GlyphPosition';
 import * as Script from './Script';
-import unicode from '@react-pdf/unicode-properties';
 import AATLayoutEngine from '../aat/AATLayoutEngine';
 import OTLayoutEngine from '../opentype/OTLayoutEngine';
 import GlyphInfo from '../opentype/GlyphInfo';

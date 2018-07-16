@@ -1,5 +1,6 @@
-import DefaultShaper from './DefaultShaper';
+import fs from 'fs';
 import unicode from '@react-pdf/unicode-properties';
+import DefaultShaper from './DefaultShaper';
 import UnicodeTrie from 'unicode-trie';
 import trieData from './dataTrie.json';
 

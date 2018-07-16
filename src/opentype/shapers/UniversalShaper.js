@@ -1,3 +1,4 @@
+import fs from 'fs';
 import DefaultShaper from './DefaultShaper';
 import StateMachine from 'dfa';
 import UnicodeTrie from 'unicode-trie';
