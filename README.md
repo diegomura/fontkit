@@ -2,6 +2,13 @@
 
 Fontkit is an advanced font engine for Node and the browser, used by [PDFKit](https://github.com/devongovett/pdfkit). It supports many font formats, advanced glyph substitution and layout features, glyph path extraction, color emoji glyphs, font subsetting, and more.
 
+## Fork changes
+- Ship parsed tries for browser compatibility
+- Ship node and browser separate builds (ignoring node dependencies)
+- Add stringIndices to GlyphRun
+- `openSync` and `open` not available for browser (throws error)
+- Remove WOFF2 from browser build (due to `broli` dependency)
+
 ## Features
 
 * Suports TrueType (.ttf), OpenType (.otf), WOFF, WOFF2, TrueType Collection (.ttc), and Datafork TrueType (.dfont) font files
