@@ -63,6 +63,7 @@
     "rollup-plugin-json": "^2.1.0",
     "rollup-plugin-local-resolve": "^1.0.7",
     "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-replace": "^1.1.1"
+    "rollup-plugin-replace": "^1.1.1",
+    "rollup-plugin-uglify": "^3.0.0"
   }
 }

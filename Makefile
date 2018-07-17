@@ -3,6 +3,8 @@ SOURCES = $(shell find src)
 SHELL := /bin/bash
 PATH := ./node_modules/.bin:$(PATH)
 
+all: index.js
+
 src/opentype/shapers/dataTrie.json:
 	babel-node src/opentype/shapers/generate-data.js
 
