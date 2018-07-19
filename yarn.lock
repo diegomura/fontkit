@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@react-pdf/unicode-properties@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@react-pdf/unicode-properties/-/unicode-properties-2.1.0.tgz#869a840d4be7db219b30d548323286ac499c7f01"
+"@react-pdf/unicode-properties@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@react-pdf/unicode-properties/-/unicode-properties-2.2.0.tgz#f109eaac244ceb108011d4038cee4cc787cb40f3"
   dependencies:
     unicode-trie "^0.3.0"
 

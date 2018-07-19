@@ -28,7 +28,7 @@
   "author": "Devon Govett <devongovett@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@react-pdf/unicode-properties": "^2.1.0",
+    "@react-pdf/unicode-properties": "^2.2.0",
     "brfs": "^1.4.0",
     "brotli": "^1.2.0",
     "browserify-optional": "^1.0.0",
