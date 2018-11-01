@@ -1,6 +1,7 @@
 import babel from 'rollup-plugin-babel';
 import json from 'rollup-plugin-json';
 import localResolve from 'rollup-plugin-local-resolve';
+import bundleSize from 'rollup-plugin-bundle-size';
 import uglify from 'rollup-plugin-uglify';
 import replace from 'rollup-plugin-replace'
 import ignore from 'rollup-plugin-ignore'
@@ -28,7 +29,8 @@ const configBase = {
       presets: [['es2015', { modules: false, loose: true }]],
       plugins: ['transform-decorators-legacy', 'transform-class-properties', 'external-helpers'],
       runtimeHelpers: true
-    })
+    }),
+    bundleSize()
   ],
   external: ['restructure/src/utils'].concat(
     Object.keys(pkg.dependencies)
@@ -67,7 +69,7 @@ const browserConfig = Object.assign({}, configBase, {
     replace({
       BROWSER: JSON.stringify(true),
     }),
-    ignore(['fs', 'brotli', 'brotli/decompress'])
+    ignore(['fs', 'brotli', 'brotli/decompress', './WOFF2Font'])
   )
 })
 
