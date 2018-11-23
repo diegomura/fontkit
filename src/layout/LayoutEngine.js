@@ -6,6 +6,7 @@ import GlyphPosition from './GlyphPosition'
 import * as Script from './Script'
 import AATLayoutEngine from '../aat/AATLayoutEngine'
 import OTLayoutEngine from '../opentype/OTLayoutEngine'
+import GlyphInfo from '../opentype/GlyphInfo'
 
 export default class LayoutEngine {
   constructor(font) {
@@ -31,27 +32,12 @@ export default class LayoutEngine {
       features = []
     }
 
-    // Map string to glyphs if needed
-    if (typeof string === 'string') {
-      // Attempt to detect the script from the string if not provided.
-      if (script == null) {
-        script = Script.forString(string)
-      }
-
-      var glyphs = this.font.glyphsForString(string)
-    } else {
-      // Attempt to detect the script from the glyph code points if not provided.
-      if (script == null) {
-        let codePoints = []
-        for (let glyph of string) {
-          codePoints.push(...glyph.codePoints)
-        }
-
-        script = Script.forCodePoints(codePoints)
-      }
-
-      var glyphs = string
+    // Attempt to detect the script from the string if not provided.
+    if (script == null) {
+      script = Script.forString(string)
     }
+
+    var glyphs = this.glyphsForString(string)
 
     let glyphRun = new GlyphRun(glyphs, features, script, language, direction)
 
@@ -79,8 +65,50 @@ export default class LayoutEngine {
 
     // Map glyph infos back to normal Glyph objects
     glyphRun.stringIndices = glyphRun.glyphs.map(glyphInfo => glyphInfo.stringIndex)
-    glyphRun.glyphs = glyphRun.glyphs.map(glyphInfo => this.font.getGlyph(glyphInfo.id))
+    glyphRun.glyphs = glyphRun.glyphs.map(glyphInfo => this.font.getGlyph(glyphInfo.id, glyphInfo.codePoints))
     return glyphRun
+  }
+
+  glyphsForString(string) {
+    let glyphs = []
+    let len = string.length
+    let idx = 0
+    let last = -1
+    let state = -1
+
+    while (idx <= len) {
+      let code = 0
+      let nextState = 0
+      let stringIndex = idx - 1
+      if (idx < len) {
+        // Decode the next codepoint from UTF 16
+        code = string.charCodeAt(idx++)
+        if (0xd800 <= code && code <= 0xdbff && idx < len) {
+          let next = string.charCodeAt(idx)
+          if (0xdc00 <= next && next <= 0xdfff) {
+            idx++
+            code = ((code & 0x3ff) << 10) + (next & 0x3ff) + 0x10000
+          }
+        }
+        // Compute the next state: 1 if the next codepoint is a variation selector, 0 otherwise.
+        nextState = (0xfe00 <= code && code <= 0xfe0f) || (0xe0100 <= code && code <= 0xe01ef) ? 1 : 0
+      } else {
+        idx++
+      }
+      if (state === 0 && nextState === 1) {
+        // Variation selector following normal codepoint.
+        glyphs.push(
+          new GlyphInfo(this.font, this.font._cmapProcessor.lookup(last, code), [last, code], null, stringIndex)
+        )
+      } else if (state === 0 && nextState === 0) {
+        // Normal codepoint following normal codepoint.
+        glyphs.push(new GlyphInfo(this.font, this.font._cmapProcessor.lookup(last), [last], null, stringIndex))
+      }
+      last = code
+      state = nextState
+    }
+
+    return glyphs
   }
 
   substitute(glyphRun) {

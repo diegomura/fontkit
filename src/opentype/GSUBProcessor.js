@@ -90,8 +90,8 @@ export default class GSUBProcessor extends OTProcessor {
             this.font,
             ligature.glyph,
             characters,
-            curGlyph.stringIndex,
-            curGlyph.features
+            curGlyph.features,
+            curGlyph.stringIndex
           )
           ligatureGlyph.shaperInfo = curGlyph.shaperInfo
           ligatureGlyph.isLigated = true

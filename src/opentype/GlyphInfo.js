@@ -2,9 +2,10 @@ import unicode from '@react-pdf/unicode-properties'
 import OTProcessor from './OTProcessor'
 
 export default class GlyphInfo {
-  constructor(font, id, codePoints = [], features) {
+  constructor(font, id, codePoints = [], features, stringIndex) {
     this._font = font
     this.codePoints = codePoints
+    this.stringIndex = stringIndex
     this.id = id
 
     this.features = {}
@@ -53,7 +54,11 @@ export default class GlyphInfo {
     }
   }
 
+  get advanceWidth() {
+    return this._font.getGlyph(this.id, this.codePoints).advanceWidth
+  }
+
   copy() {
-    return new GlyphInfo(this._font, this.id, this.codePoints, this.features)
+    return new GlyphInfo(this._font, this.id, this.codePoints, this.features, this.stringIndex)
   }
 }
