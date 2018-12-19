@@ -2,12 +2,24 @@ import fontkit from '../src';
 import assert from 'assert';
 
 describe('fontkit', function() {
-  it('should open a font asynchronously', () =>
+  it('should open a font asynchronously with callback', () =>
     fontkit.open(__dirname + '/data/OpenSans/OpenSans-Regular.ttf', function(err, font) {
       assert.equal(err, null);
       return assert.equal(font.constructor.name, 'TTFFont');
     })
   );
+
+  it('should open a font asynchronously without callback, returning a Promise', async () => {
+    let err = null;
+    let font;
+    try {
+      font = await fontkit.open(__dirname + '/data/OpenSans/OpenSans-Regular.ttf');
+    } catch (e) {
+      err = e;
+    }
+    assert.equal(err, null);
+    return assert.equal(font.constructor.name, 'TTFFont');
+  });
 
   it('should open a font synchronously', function() {
     let font = fontkit.openSync(__dirname + '/data/OpenSans/OpenSans-Regular.ttf');

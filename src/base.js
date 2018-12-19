@@ -29,19 +29,25 @@ fontkit.open = function(filename, postscriptName, callback) {
     postscriptName = null;
   }
 
-  fs.readFile(filename, function(err, buffer) {
-    if (err) { return callback(err); }
+  const openingPromise = new Promise((resolve, reject) => {
+    fs.readFile(filename, (err, buffer) => {
+      if (err) { return reject(err); }
 
-    try {
-      var font = fontkit.create(buffer, postscriptName);
-    } catch (e) {
-      return callback(e);
-    }
+      try {
+        var font = fontkit.create(buffer, postscriptName);
+      } catch (err) {
+        return reject(err);
+      }
 
-    return callback(null, font);
+      return resolve(font);
+    });
   });
 
-  return;
+  if (typeof callback === 'function') {
+    return openingPromise.then(font => callback(null, font)).catch(err => callback(err));
+  }
+
+  return openingPromise;
 };
 
 fontkit.create = function(buffer, postscriptName) {

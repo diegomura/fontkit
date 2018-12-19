@@ -35,6 +35,18 @@ var fontkit = require('fontkit')
 // open a font synchronously
 var font = fontkit.openSync('font.ttf')
 
+// or, open a font asynchronously, providing a callback
+fontkit.open('font.ttf', (err, font) => {
+  // use font or handle error
+})
+
+// or, open a font asynchronously, awaiting a Promise
+fontkit.open('font.ttf').then(font => {
+  // use font
+}).catch(err => {
+  // handle error
+})
+
 // layout a string, using default shaping features.
 // returns a GlyphRun, describing glyphs and positions.
 var run = font.layout('hello world!')
