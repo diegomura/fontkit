@@ -59,3 +59,8 @@ fontkit.create = function(buffer, postscriptName) {
 
   throw new Error('Unknown font format');
 };
+
+fontkit.defaultLanguage = 'en';
+fontkit.setDefaultLanguage = function(lang = 'en') {
+  fontkit.defaultLanguage = lang;
+};
